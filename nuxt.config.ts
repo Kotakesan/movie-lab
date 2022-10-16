@@ -1,5 +1,5 @@
 import { defineNuxtConfig } from 'nuxt'
-const { API_KEY } = process.env
+const { API_KEY, BASE_URL } = process.env
 
 // https://v3.nuxtjs.org/api/configuration/nuxt.config
 export default defineNuxtConfig({
@@ -12,7 +12,8 @@ export default defineNuxtConfig({
       'process.env.DEBUG': false,
     },
   },
-  publicRuntimeConfig: {
+  runtimeConfig: {
     apiKey: API_KEY,
+    baseUrl: BASE_URL,
   },
 })

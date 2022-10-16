@@ -10,11 +10,7 @@
     <div v-if="!imageSource" class="no-img">
       <v-icon> mdi-circle-off-outline </v-icon>
     </div>
-    <div
-      v-if="!noHover"
-      class="image-movie__title-wrapper"
-      @click="$emit('click')"
-    >
+    <div v-if="!noHover" class="image-movie__title-wrapper" @click="onClick">
       <div
         class="image-movie__title pt-16 text-center font-weight-bold"
         :title="title"
@@ -25,24 +21,24 @@
   </div>
 </template>
 
-<script>
-export default {
-  props: {
-    title: { type: String, default: '' },
-    imageSource: { type: String, default: '' },
-    maxWidth: { type: [String, Number], default: '100%' },
-    noHover: { type: Boolean, default: false },
-  },
-  data() {
-    return {
-      imageBaseUrl: 'https://image.tmdb.org/t/p/w500',
-    }
-  },
-  computed: {
-    img() {
-      return this.imageBaseUrl + this.imageSource
-    },
-  },
+<script setup lang="ts">
+type Props = {
+  title: string
+  imageSource: string
+  maxWidth: string | number
+  noHover: boolean
+}
+const { title, imageSource, maxWidth, noHover } = defineProps<Props>()
+interface Emits {
+  (e: 'click'): void
+}
+const emits = defineEmits<Emits>()
+
+const imageBaseUrl = 'https://image.tmdb.org/t/p/w500'
+const img = computed<string>(() => imageBaseUrl + imageSource)
+
+const onClick = () => {
+  emits('click')
 }
 </script>
 

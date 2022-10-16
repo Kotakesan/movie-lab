@@ -1,14 +1,45 @@
 <template>
   <div>
-    <!-- <ListMovies :title="title" :movies="movies" @click="onClick" /> -->
-    <!-- <div v-if="searchText && !movies.length" class="pa-8 movies__not-found"> -->
-    No movies found.
-    <!-- </div> -->
+    <OrgListMovies :title="title" :movies="data" @click="onClick" />
+    <div v-if="searchText && !data.length" class="pa-8 movies__not-found">
+      No movies found.
+    </div>
     <!-- <Paginate :value="page" :length="length" @input="onChangePage" /> -->
   </div>
 </template>
 
-<script>
+<script setup lang="ts">
+export type Movie = {
+  adult: boolean
+  backdrop_path: string
+  genre_ids: number[]
+  id: number
+  original_language: string
+  original_title: string
+  overview: string
+  popularity: number
+  poster_path: string
+  release_date: string
+  title: string
+  video: false
+  vote_average: number
+  vote_count: number
+}
+const { data } = await useFetch<Movie[]>('/api/movies/popular')
+const searchText = ''
+const router = useRouter()
+
+const title = computed<string>(() =>
+  searchText ? 'Search Movies' : 'Popular Movies'
+)
+
+const onClick = (movie: Movie) => {
+  router.push(`movies/${movie.id}`)
+}
+
+// const onClick = (movie) => {
+//   $router.push(`/movies/${movie.id}`)
+// }
 // export default {
 //   async asyncData({ app, query }) {
 //     const searchText = query.query

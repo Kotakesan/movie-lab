@@ -8,7 +8,7 @@
     "postinstall": "nuxt prepare"
   },
   "devDependencies": {
-    "@mdi/font": "^6.7.96",
+    "@mdi/font": "^7.0.96",
     "nuxt": "3.0.0-rc.11",
     "sass": "^1.55.0"
   },
