@@ -10,14 +10,18 @@
     <div v-if="!imageSource" class="no-img">
       <v-icon> mdi-circle-off-outline </v-icon>
     </div>
-    <div v-if="!noHover" class="image-movie__title-wrapper" @click="onClick">
+    <NuxtLink
+      v-if="!noHover"
+      class="image-movie__title-wrapper"
+      @click="onClick"
+    >
       <div
         class="image-movie__title pt-16 text-center font-weight-bold"
         :title="title"
       >
         {{ title }}
       </div>
-    </div>
+    </NuxtLink>
   </div>
 </template>
 
